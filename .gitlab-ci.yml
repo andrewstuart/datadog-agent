@@ -165,7 +165,6 @@ variables:
   ARTIFACTORY_GEMS_PATH: artifactory/api/gems/agent-gems
   USE_CACHING_PROXY_RUBY: "true"
 
-
 #
 # Condition mixins for simplification of rules
 #

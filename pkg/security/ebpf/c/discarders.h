@@ -337,6 +337,11 @@ int __attribute__((always_inline)) discard_pid(u64 event_type, u32 tgid, u64 tim
         if ((discarder_timestamp = get_discarder_timestamp(&pid_params->params, event_type)) != NULL) {
             *discarder_timestamp = timestamp;
         }
+
+        u64 tm = bpf_ktime_get_ns();
+        if (pid_params->params.is_retained && pid_params->params.expire_at < tm) {
+            pid_params->params.is_retained = 0;
+        }
     } else {
         struct pid_discarder_params_t new_pid_params = {};
         add_event_to_mask(&new_pid_params.params.event_mask, event_type);

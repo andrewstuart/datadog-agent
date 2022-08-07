@@ -11,7 +11,7 @@ deploy_staging_deb-7:
   stage: deploy7
   resource_group: deb_bucket
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-builders/gitlab_agent_deploy:$DATADOG_AGENT_BUILDERS
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
   dependencies:
     - agent_deb-x64-a7
     - agent_deb-arm64-a7
@@ -54,7 +54,7 @@ deploy_staging_rpm-7:
   stage: deploy7
   resource_group: rpm_bucket
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-builders/gitlab_agent_deploy:$DATADOG_AGENT_BUILDERS
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
   dependencies:
     - agent_rpm-x64-a7
     - agent_rpm-arm64-a7
@@ -81,7 +81,7 @@ deploy_staging_suse_rpm-7:
   stage: deploy7
   resource_group: suse_bucket
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-builders/gitlab_agent_deploy:$DATADOG_AGENT_BUILDERS
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
   dependencies:
     - agent_suse-x64-a7
     - dogstatsd_suse-x64
@@ -101,7 +101,7 @@ deploy_staging_dmg-a7:
     !reference [.on_deploy_a7]
   stage: deploy7
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-builders/gitlab_agent_deploy:$DATADOG_AGENT_BUILDERS
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
   dependencies: ["agent_dmg-x64-a7"]
   before_script:
     - ls $OMNIBUS_PACKAGE_DIR
@@ -117,7 +117,7 @@ deploy_staging_dsd:
     !reference [.on_deploy_a7]
   stage: deploy7
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-builders/gitlab_agent_deploy:$DATADOG_AGENT_BUILDERS
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
   dependencies: ["build_dogstatsd-binary_x64"]
   script:
     - $S3_CP_CMD $S3_ARTIFACTS_URI/dogstatsd/dogstatsd ./dogstatsd
@@ -130,7 +130,7 @@ deploy_staging_iot_agent:
     !reference [.on_deploy_a7]
   stage: deploy7
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-builders/gitlab_agent_deploy:$DATADOG_AGENT_BUILDERS
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
   dependencies: ["build_iot_agent-binary_x64"]
   script:
     - $S3_CP_CMD $S3_ARTIFACTS_URI/iot/agent ./agent
@@ -144,7 +144,7 @@ deploy_staging_android_tags:
     - when: never
   stage: deploy7
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/datadog-agent-builders/gitlab_agent_deploy:$DATADOG_AGENT_BUILDERS
-  tags: ["runner:main"]
+  tags: ["arch:amd64"]
   dependencies: ["agent_android_apk"]
   before_script:
     - ls $OMNIBUS_PACKAGE_DIR
